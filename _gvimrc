@@ -1,0 +1,13 @@
+if has("gui_macvim")
+  " 设置窗口大小
+  set lines=50 columns=100
+  " 设置透明度
+  set transparency=10
+
+  " 取消默认的快捷键
+  let macvim_skip_cmd_opt_movement = 1
+  let macvim_hig_shift_movment = 1
+
+  " 设置option 键为meta键
+  set macmeta
+endif

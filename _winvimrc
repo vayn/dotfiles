@@ -1,0 +1,433 @@
+" Last Change: 2016-12-07T10:48:00
+" Vimrc for Windows
+scriptencoding utf-8
+
+" 初始化 {{{1
+" 自带设置 {{{2
+runtime vimrc_example.vim
+runtime macros/matchit.vim
+" 2}}}
+
+" Pathogen Plugin Manager
+execute pathogen#infect()
+
+" 工作目录 {{{2
+function! CHANGE_CURR_DIR()
+  let _dir=escape(expand("%:p:h"),' ')
+  exec "cd " . _dir
+  unlet _dir
+endfunction
+autocmd BufEnter * call CHANGE_CURR_DIR()
+" 2}}}
+
+" Python 高亮
+let python_highlight_all=1
+" 1}}}
+
+
+" 常规设置 {{{1
+" Unix 风格 slash
+set shellslash
+" history 文件记录行数
+set history=1000
+
+" 备份 {{{2
+set backup
+set undofile
+if has("win32") || has("win64")
+  set backupdir=%TMP%
+  set directory=%TMP%
+  set undodir=%TMP%
+else
+  set backupdir=~/.tmp/backup " backups
+  set directory=~/.tmp/swap   " swap files
+  set undodir=~/.tmp/undodir  " undo
+endif
+set undolevels=1000
+set undoreload=10000 "max number lines to save for undo on a buffer reload
+" 2}}}
+
+" 总是显示statusline
+set laststatus=2
+" 允许backspace和光标键跨越行边界
+set whichwrap=b,s,[,],h,l
+" 搜索时不区分大小写
+set ignorecase
+" 搜索高亮
+set hlsearch
+" 当前 buffer 可放在 bg 而不用写入磁盘
+set hidden
+" 禁止在选择补全时打开 preview 窗口显示文档信息
+" 针对 python omnicomplete（太扰民了）
+set completeopt-=preview
+
+set isfname-==
+set noequalalways
+set winaltkeys=no
+set completeopt+=longest
+set cedit=<C-Y>
+" 1}}}
+
+
+" 格式设置 {{{1
+" 编码 {{{2
+set encoding=utf-8
+set fileencodings=utf-8,chinese,latin-1
+if has("win32")
+  set fileencoding=chinese
+else
+  set fileencoding=utf-8
+endif
+language messages zh_CN.utf-8
+" 2}}}
+
+" 正确地处理中文字符的折行和拼接
+set formatoptions+=mM
+" 设置文件格式为unix
+set fileformat=unix
+
+" 缩进
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+" 行间距
+set linespace=4
+set expandtab
+
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-
+" 使backspace正常处理indent, eol, start等
+set backspace=indent,eol,start
+" 在输入命令时列出匹配项目
+set wildmenu
+set wildmode=list:longest
+" 1}}}
+
+
+" 显示设置 {{{1
+" 字体
+if has("win32") || has("win64")
+  set guifont=Source_Code_Pro:h10.5
+else
+  set guifont=Monaco\ 10
+endif
+
+" 窗口及主题设置 {{{2
+if has('gui_running')
+  "" 有些终端不能改变大小 http://vayn.de/qF7u2c
+  set lines=30      " 终端出现断裂的原因
+  set columns=85
+
+  set background=dark
+  colorscheme solarized
+else
+  set ambiwidth=single
+  colorscheme lemon256
+endif
+" 2}}}
+
+" 高亮光标所在行
+set cursorline
+" 使用相对行号
+set relativenumber
+" 在终端输出一个相对平滑的更新
+set ttyfast
+" 在输入括号时光标会短暂地跳到与之相匹配的括号处，不影响输入
+set showmatch
+" 匹配括号的规则，增加针对html的<>
+set matchpairs=(:),{:},[:],<:>
+" 匹配括号高亮的时间（单位是十分之一秒）
+set matchtime=1
+" 不要闪烁
+set novisualbell
+set listchars=eol:$,tab:>-,nbsp:~
+" 自动关闭折叠
+set foldclose=all
+set foldmethod=marker
+" 显示窗口末行尽量多的内容
+set display=lastline
+" 自动回绕
+set nolinebreak
+" 启动的时候不显示intro
+set shortmess=atI
+" 屏幕保留行数
+set scrolloff=5
+
+" 隐藏底部滚动条
+set guioptions-=b
+" 隐藏右边滚动条
+set guioptions-=R
+set guioptions-=r
+" 隐藏左边滚动条
+set guioptions-=l
+set guioptions-=L
+" 隐藏菜单和工具栏
+set guioptions-=m
+set guioptions-=T
+
+" Avoid cmdline redraw on every entered char by turning off Arabic
+" shaping (which is implemented poorly).
+if has('arabic')
+  set noarabicshape
+endif
+
+if has("conceal")
+  set concealcursor=nc
+  set maxcombine=4
+endif
+" 1}}}
+
+
+" 键映射 {{{1
+" 回车取消搜索高亮
+nnoremap <silent> <CR> :nohl<CR>
+
+" 窗口区域切换 ←→↑↓
+imap <silent> `h <esc><C-W><left>
+vmap <silent> `h <esc><C-W><left>
+nmap <silent> `h <C-W><left>
+imap <silent> `l <esc><C-W><right>
+vmap <silent> `l <esc><C-W><right>
+nmap <silent> `l <C-W><right>
+imap <silent> `k <esc><C-W><up>
+vmap <silent> `k <esc><C-W><up>
+nmap <silent> `k <C-W><up>
+imap <silent> `j <esc><C-W><down>
+vmap <silent> `j <esc><C-W><down>
+nmap <silent> `j <C-W><down>
+
+" Use the damn hjkl keys
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+" And make them fucking work, too.
+nnoremap j gj
+nnoremap k gk
+
+" Display Highlight Group
+nnoremap wh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+nnoremap <BS> d
+
+" 跳转搜索结果时，其所在行居中并闪烁
+nnoremap n nzzzv:call PulseCursorLine()<cr>
+nnoremap N Nzzzv:call PulseCursorLine()<cr>
+
+" ctrl + c
+vmap <C-c> "+y
+" ctrl + x
+vmap <C-x> "+x
+" ctrl + v
+nnoremap <C-v> "+gP
+" ctrl + h
+imap <C-h> <esc>:%s/
+vmap <C-h> <esc>:%s/
+nmap <C-h> :%s/
+
+" 把缺省的Ctrl – X + O 改为 F4
+imap <F4> <C-X><C-O>
+
+" Make selecting inside an HTML tag less dumb
+nnoremap Vit vitVkoj
+nnoremap Vat vatV
+" ci[ 删除一对 [] 中的所有字符并进入插入模式
+" ci( 删除一对 () 中的所有字符并进入插入模式
+" ci< 删除一对 <> 中的所有字符并进入插入模式
+" ci{ 删除一对 {} 中的所有字符并进入插入模式
+" cit 删除一对 HTML/XML 的标签内部的所有字符并进入插入模式
+" ci” ci’ ci` 删除一对引号字符 (” 或 ‘ 或 `) 中所有字符并进入插入模式
+
+" 交换历史移动键位，键位作用参见 cmdline.txt
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+cnoremap <Up> <C-P>
+cnoremap <Down> <C-N>
+
+" 切换buffer
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
+
+" Leader mappings {{{2
+let mapleader=","
+
+" strip all trailing whitespace in the current file
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+" imitates TextMates Ctrl+Q function to re-hardwrap paragraphs of text
+nnoremap <leader>q gqip
+" CSS properties sorted
+nnoremap <leader>S /{<CR>jV/^\s*\}\?$<CR>k:sort<CR>:noh<CR>
+
+" Edit vim stuff.
+"nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>ev :call EditVimRC()<cr>
+nnoremap <leader>es <C-w>s<C-w>j<C-w>L:e $VIM/vimfiles/bundle/neosnippet-snippets/neosnippets<cr>
+
+" open a new vertical split and switch over to it
+nnoremap <leader>w <C-w>v<C-w>l
+
+" 让选中内容变成搜索项
+vnoremap <Leader># "9y?<C-R>='\V'.substitute(escape(@9,'\?'),'\n','\\n','g')<CR><CR>
+vnoremap <Leader>* "9y/<C-R>='\V'.substitute(escape(@9,'\/'),'\n','\\n','g')<CR><CR>
+" 2}}}
+" 1}}}
+
+
+" 其他自动命令 {{{1
+" 设默认 filetype 为 text
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
+" setting for git commit
+autocmd Filetype gitcommit setlocal spell textwidth=72
+" 1}}}
+
+
+" 自定义函数 {{{1
+" Pulse {{{2
+" 来自 http://vayn.de/tUAYAK
+function! PulseCursorLine()
+  let current_window=winnr()
+
+  windo set nocursorline
+  execute current_window . 'wincmd w'
+
+  setlocal cursorline
+
+  redir => old_hi
+    silent execute 'hi CursorLine'
+  redir END
+  let old_hi=split(old_hi, '\n')[0]
+  let old_hi=substitute(old_hi, 'xxx', '', '')
+
+  hi CursorLine guibg=#2a2a2a ctermbg=233
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#333333 ctermbg=235
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#3a3a3a ctermbg=239
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#444444 ctermbg=240
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#4a4a4a ctermbg=242
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#444444 ctermbg=240
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#3a3a3a ctermbg=239
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#333333 ctermbg=235
+  redraw
+  sleep 20m
+
+  hi CursorLine guibg=#2a2a2a ctermbg=233
+  redraw
+  sleep 20m
+
+  execute 'hi ' . old_hi
+
+  windo set cursorline
+  execute current_window . 'wincmd w'
+endfunction
+" 2}}}
+
+" EditVimRC {{{2
+" 编辑VIMRC文件
+function! EditVimRC()
+  if argc() > 0
+    topleft vertical new
+    redraw
+  endif
+  edit $MYVIMRC
+endfunction
+" 2}}}
+" 1}}}
+
+
+" 插件 {{{1
+" Airline: {{{2
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='solarized'
+let g:airline_enable_branch=1
+
+" define the set of text to display for each mode
+let g:airline_mode_map={
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
+
+" Automatically displays all buffers when there's only one tab open
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_alt_sep='|'
+" 2}}}
+
+" Mru: {{{2
+if has("win32") || has("win64")
+  let MRU_File='$VIM/vimfiles/vim_mru_files'
+else
+  let MRU_File='~/.vim/tmp/mru_files'
+endif
+let MRU_Max_Entries=2000
+let MRU_Exclude_Files='\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/|^c:\\temp\\.*'
+" 加载菜单太耗时
+let MRU_Add_Menu=0
+" 2}}}
+
+" NERDTree: {{{2
+"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <F7> :NERDTreeToggle<CR>
+" 2}}}
+
+" Neosnippet: {{{2
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+" 2}}}
+
+" Neocomplete: {{{2
+" Use neocomplete
+let g:neocomplete#enable_at_startup=1
+" Enable omni completion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" 2}}}
+
+" Emmmet: {{{2
+let g:user_emmet_install_global=0
+autocmd FileType html,css EmmetInstall
+" 2}}}
+
+" Jedi: {{{2
+let g:jedi#auto_vim_configuration=0
+let g:jedi#completions_enabled=0
+autocmd FileType python setlocal completeopt-=preview
+" 2}}}
+" 1}}}
+
+" vim:fdm=marker
