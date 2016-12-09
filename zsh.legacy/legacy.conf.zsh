@@ -174,6 +174,7 @@ complete-files () { _files $@ }
 # Alias {{{1
 
 # 命令别名 {{{2
+alias :q='exit'
 alias ll='ls -lh'
 alias la='ls -A'
 alias ....='../..'

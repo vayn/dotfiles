@@ -9,20 +9,21 @@ You can install this via the command-line with either `curl` or `wget`.
 ### via curl
 
 ```shell
-sh -c "$(curl -fsSL https://coding.net/u/vayn/p/dotfiles/git/raw/master/install.sh)"
+$ sh -c "$(curl -fsSL https://coding.net/u/vayn/p/dotfiles/git/raw/master/install.sh)"
 ```
 
 ### via wget
 
 ```shell
-sh -c "$(wget https://coding.net/u/vayn/p/dotfiles/git/raw/master/install.sh -O -)"
+$ sh -c "$(wget https://coding.net/u/vayn/p/dotfiles/git/raw/master/install.sh -O -)"
 ```
 
-After installing dotfiles, you should install Vim plugins with NeoBundle:
+After installing dotfiles, you should install Vim and Zsh plugins:
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
-vim +NeoBundleInstall +qall
+$ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)"
+$ vim +NeoBundleInstall +qall
+$ pip install zsh-directory-history
 ```
 
 ## Acknowledgement

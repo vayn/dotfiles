@@ -123,7 +123,8 @@ init() {
 
 main
 
-printf "${YELLOW}Done.${NORMAL} Now you should use command below to install Vim plugins:\n\n"
+printf "${YELLOW}Done.${NORMAL} Now you should use command below to install Vim and Zsh plugins:\n\n"
+printf "$ ${RED}pip install zsh-directory-history${NORMAL}\n"
 printf "$ ${RED}sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh)\"${NORMAL}\n"
 printf "$ ${RED}vim +NeoBundleInstall +qall${NORMAL}\n\n"
 
