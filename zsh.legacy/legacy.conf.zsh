@@ -103,16 +103,6 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 # 3}}}
 
-# directory-history 设置 {{{3
-# Bind CTRL+k and CTRL+j to substring search
-bindkey '^j' history-substring-search-up
-bindkey '^k' history-substring-search-down
-
-# Bind k and j for VI mode to go through history
-bindkey -M vicmd 'j' directory-history-search-backward
-bindkey -M vicmd 'k' directory-history-search-forward
-# 3}}}
-
 # End: Commandline 2}}}
 
 # End: Config 1}}}
@@ -229,6 +219,14 @@ source $ZSH_LEGACY/plugins/set-title-tab.zsh
 # Directory-history {{{2
 source $ZSH_LEGACY/plugins/directory-history/directory-history.plugin.zsh
 source $ZSH_LEGACY/plugins/directory-history/zsh-history-substring-search.zsh
+
+# Bind CTRL+k and CTRL+j to substring search
+bindkey '^j' history-substring-search-up
+bindkey '^k' history-substring-search-down
+
+# Bind k and j for VI mode to go through history
+bindkey -M vicmd 'j' directory-history-search-backward
+bindkey -M vicmd 'k' directory-history-search-forward
 # 2}}}
 
 # color-dir-name {{{2
