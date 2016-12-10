@@ -212,6 +212,7 @@
     "MISC": "----------------------",
     "floating": [
         "com.apple.*",
+        "com.initex.proxifier.macosx",
         "com.kapeli.dash",
         "com.nylas.nylas-mail",
         "com.tencent.*",
