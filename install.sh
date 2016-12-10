@@ -147,9 +147,9 @@ main() {
     local DF_TMUXCONF=$DOTFILES/_tmux.conf
     init ~/.tmux.conf $DF_TMUXCONF
 
-    # Plugins Installation {{{2
     printf "${YELLOW}Initialization done.${NORMAL}\n\n"
 
+    # Plugins Installation {{{2
     printf "${BOLD}Installing Zsh plugins...${NORMAL}\n"
     if [[ $(confirm) ]]; then
         pip install zsh-directory-history 
@@ -157,7 +157,6 @@ main() {
         printf "${GREEN}You can install Zsh plugins manually:${NORMAL}\n\n"
         printf "  ${RED}\`pip install zsh-directory-history\`${NORMAL}\n\n"
     fi
-
 
     printf "${BOLD}Installing Vim plugins...${NORMAL}\n"
     if [[ $(confirm) ]]; then
