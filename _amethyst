@@ -212,6 +212,7 @@
     "MISC": "----------------------",
     "floating": [
         "com.apple.*",
+        "com.eusoft.eudic",
         "com.initex.proxifier.macosx",
         "com.kapeli.dash",
         "com.nylas.nylas-mail",
@@ -221,7 +222,7 @@
         "com.wutian.weibo",
         "org.pqrs.Karabiner"
     ],
-    "float-small-windows": true,
+    "float-small-windows": false,
     "mouse-follows-focus": false,
     "focus-follows-mouse": false,
     "enables-layout-hud": true,
