@@ -65,6 +65,7 @@ NeoBundle 'Quramy/tsuquyomi', {
             \    'lazy': 1,
             \    'autoload': { 'filetypes': ['typescript'] }
             \ }
+NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/neocomplete.vim'
