@@ -212,9 +212,10 @@
     "MISC": "----------------------",
     "floating": [
         "com.apple.*",
+        "com.egoistian.devdocs",
         "com.eusoft.eudic",
         "com.initex.proxifier.macosx",
-        "com.kapeli.dash",
+        "com.kapeli.dashdoc",
         "com.nylas.nylas-mail",
         "com.runningwithcrayons.Alfred-3",
         "com.runningwithcrayons.Alfred-Preferences-3",
