@@ -48,10 +48,7 @@ NeoBundle 'leafgarland/typescript-vim', {
 NeoBundle 'luochen1990/rainbow'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'morhetz/gruvbox'
-NeoBundle 'mxw/vim-jsx', {
-            \    'lazy': 1,
-            \    'autoload': { 'filetypes': ['javascript', 'jsx'] }
-            \ }
+NeoBundle 'mxw/vim-jsx'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'othree/jspc.vim'
 NeoBundle 'othree/yajs.vim'
