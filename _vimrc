@@ -40,6 +40,7 @@ NeoBundle 'elixir-lang/vim-elixir', {
             \ }
 NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'leafgarland/typescript-vim', {
             \    'lazy': 1,
             \    'autoload': { 'filetypes': ['typescript'] }
@@ -47,19 +48,13 @@ NeoBundle 'leafgarland/typescript-vim', {
 NeoBundle 'luochen1990/rainbow'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'morhetz/gruvbox'
+NeoBundle 'mxw/vim-jsx', {
+            \    'lazy': 1,
+            \    'autoload': { 'filetypes': ['javascript', 'jsx'] }
+            \ }
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'othree/jspc.vim', {
-            \    'lazy': 1,
-            \    'autoload': {
-            \       'filetypes': ['javascript', 'typescript', 'html']
-            \    }
-            \ }
-NeoBundle 'pangloss/vim-javascript', {
-            \    'lazy': 1,
-            \    'autoload': {
-            \       'filetypes': ['javascript', 'typescript', 'html']
-            \    }
-            \ }
+NeoBundle 'othree/jspc.vim'
+NeoBundle 'othree/yajs.vim'
 NeoBundle 'powerman/vim-plugin-viewdoc'
 NeoBundle 'Quramy/tsuquyomi', {
             \    'lazy': 1,
@@ -717,6 +712,10 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" 2}}}
+
+" vim-jsx {{{2
+let g:jsx_ext_required=0
 " 2}}}
 
 " End: Plugins 1}}}
