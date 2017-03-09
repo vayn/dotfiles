@@ -60,6 +60,10 @@ NeoBundle 'Quramy/tsuquyomi', {
 NeoBundle 'rizzatti/dash.vim'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'slashmili/alchemist.vim', {
+            \    'lazy': 1,
+            \    'autoload': { 'filetypes': ['elixir'] }
+            \ }
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
