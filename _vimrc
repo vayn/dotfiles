@@ -28,6 +28,8 @@ NeoBundle 'Shougo/vimproc', {
             \ }
 
 NeoBundle 'asins/vimcdoc'
+NeoBundle 'ap/vim-css-color'
+NeoBundle 'chemzqm/wxapp.vim'
 NeoBundle 'CodeFalling/fcitx-vim-osx'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'davidhalter/jedi-vim', {
@@ -625,7 +627,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 
 " For snippet_complete marker.
 if has('conceal')
-    set conceallevel=2 concealcursor=i
+    set conceallevel=0 concealcursor=i
 endif
 
 " Enable snipMate compatibility feature.
