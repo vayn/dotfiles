@@ -1,0 +1,12 @@
+#!/bin/sh
+# Convert video to gif.
+
+if [[ $# -ne 3 ]]; then
+    echo "Usage: trans_gif source.mp4 target.gif 300"
+    exit 1
+fi
+
+palette="/tmp/palette.png"
+filters="fps=15,scale=$3:-1:flags=lanczos"
+ffmpeg -v warning -i $1 -vf "$filters,palettegen" -y $palette
+ffmpeg -v warning -i $1 -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse" -y $2
