@@ -36,10 +36,7 @@ NeoBundle 'davidhalter/jedi-vim', {
             \    'lazy': 1,
             \    'autoload': { 'filetypes': ['python'] }
             \ }
-NeoBundle 'elixir-lang/vim-elixir', {
-            \    'lazy': 1,
-            \    'autoload': { 'filetypes': ['elixir'] }
-            \ }
+NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'honza/vim-snippets'
