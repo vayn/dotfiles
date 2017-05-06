@@ -27,56 +27,81 @@ NeoBundle 'Shougo/vimproc', {
             \    },
             \ }
 
+" Vim Document {{{4
 NeoBundle 'asins/vimcdoc'
-NeoBundle 'ap/vim-css-color'
-NeoBundle 'chemzqm/wxapp.vim'
+NeoBundle 'powerman/vim-plugin-viewdoc'
+" 4}}}
+
+" Utility {{{4
 NeoBundle 'CodeFalling/fcitx-vim-osx'
 NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'junegunn/goyo.vim'
+NeoBundle 'junegunn/vim-easy-align'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'rizzatti/dash.vim'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'tpope/vim-surround'
+" 4}}}
+
+" Generic Programming Support {{{4
 NeoBundle 'davidhalter/jedi-vim', {
             \    'lazy': 1,
             \    'autoload': { 'filetypes': ['python'] }
             \ }
-NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'junegunn/goyo.vim'
-NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'leafgarland/typescript-vim', {
-            \    'lazy': 1,
-            \    'autoload': { 'filetypes': ['typescript'] }
-            \ }
-NeoBundle 'luochen1990/rainbow'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'mxw/vim-jsx'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'othree/jspc.vim'
-NeoBundle 'othree/yajs.vim'
-NeoBundle 'powerman/vim-plugin-viewdoc'
-NeoBundle 'Quramy/tsuquyomi', {
-            \    'lazy': 1,
-            \    'autoload': { 'filetypes': ['typescript'] }
-            \ }
-NeoBundle 'rizzatti/dash.vim'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'slashmili/alchemist.vim', {
-            \    'lazy': 1,
-            \    'autoload': { 'filetypes': ['elixir'] }
-            \ }
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
-NeoBundle 'terryma/vim-multiple-cursors'
+" 4}}}
+
+" Git Support
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
+
+" Web Development Support {{{4
+NeoBundle 'ap/vim-css-color'
+" WeChat
+NeoBundle 'chemzqm/wxapp.vim'
+" TypeScript
+NeoBundle 'leafgarland/typescript-vim', {
+            \    'lazy': 1,
+            \    'autoload': { 'filetypes': ['typescript'] }
+            \ }
+NeoBundle 'Quramy/tsuquyomi', {
+            \    'lazy': 1,
+            \    'autoload': { 'filetypes': ['typescript'] }
+            \ }
+" JSX Support
+NeoBundle 'mxw/vim-jsx'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'othree/jspc.vim'
+NeoBundle 'othree/yajs.vim'
+" 4}}}
+
+
+" Rust Support
 NeoBundle 'wting/rust.vim', {
             \    'lazy': 1,
             \    'autoload': { 'filetypes': ['rust'] }
             \ }
+
+" Elixir Support {{{4
+NeoBundle 'elixir-lang/vim-elixir'
+NeoBundle 'avdgaag/vim-phoenix'
+NeoBundle 'mmorearty/elixir-ctags'
+NeoBundle 'slashmili/alchemist.vim'
+" 4}}}
+
+" Theme / Interface {{{4
+NeoBundle 'luochen1990/rainbow'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
+NeoBundle 'morhetz/gruvbox'
+" 4}}}
+
 " 3}}}
 
 " All of your Plugins must be added before the following line
@@ -265,8 +290,9 @@ else
 endif
 " End: Titlebar 2}}}
 
-" 高亮光标所在行
+" 高亮光标所在行列
 set cursorline
+set cursorcolumn
 " highlight column after 'textwidth'
 set colorcolumn=+1
 " highlight three columns after 'textwidth'
@@ -627,6 +653,7 @@ endif
 let g:neocomplete#force_omni_input_patterns.rust='[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 let g:neocomplete#force_omni_input_patterns.python='\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 let g:neocomplete#force_omni_input_patterns.typescript='[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplete#force_omni_input_patterns.elixir='[^. *\t]\.\w*\|[a-zA-Z_]\w*::'
 
 " Enable omni completion. {{{3
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -636,6 +663,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType typescript set omnifunc=tsuquyomi#complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType elixir setlocal omnifunc=elixircomplete#Complete
 " 3}}}
 
 " Define dictionary.
@@ -755,6 +783,11 @@ nmap ga <Plug>(EasyAlign)
 
 " vim-jsx {{{2
 let g:jsx_ext_required=0
+" 2}}}
+
+" vim-alchemist {{{2
+autocmd FileType elixir nnoremap <buffer> <leader>h :call alchemist#exdoc()<CR>
+autocmd FileType elixir nnoremap <buffer> <leader>d :call alchemist#exdef()<CR>
 " 2}}}
 
 " End: Plugins 1}}}
