@@ -3,6 +3,7 @@
     "layouts": [
         "fullscreen",
         "tall",
+        "tall-right",
         "wide",
         "column"
     ],
