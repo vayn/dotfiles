@@ -1,1 +1,0 @@
-/Users/vayn/.dotfiles/zsh
