@@ -35,6 +35,7 @@ NeoBundle 'powerman/vim-plugin-viewdoc'
 " Utility {{{4
 NeoBundle 'CodeFalling/fcitx-vim-osx'
 NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'nathanaelkane/vim-indent-guides'
