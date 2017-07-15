@@ -205,6 +205,76 @@ alias -g NUL="/dev/null"
 
 # End: Alias 1}}}
 
+# Functions {{{1
+vman () { vim +"set ft=man" +"Man $@" }
+nocolor () { sed -r "s:\x1b\[[0-9;]*[mK]::g" }
+expandurl() { curl -sIL $1 | sed -n 's/Location:.* //p' }
+
+ptyless () { # 使用伪终端代替管道，对 ls 这种“顽固分子”有效 {{{2
+  zmodload zsh/zpty
+  zpty ptyless ${1+"$@"}
+  zpty -r ptyless > /tmp/ptyless.$$
+  less /tmp/ptyless.$$
+  rm -f /tmp/ptyless.$$
+  zpty -d ptyless
+} # 2}}}
+
+sdu () { #排序版的 du {{{2
+  du -sk $@ | sort -n | awk '
+BEGIN {
+  split("K,M,G,T", Units, ",");
+  FS="\t";
+  OFS="\t";
+}
+{
+  u = 1;
+  while ($1 >= 1024) {
+  $1 = $1 / 1024;
+  u += 1
+  }
+  $1 = sprintf("%.1f%s", $1, Units[u]);
+  sub(/\.0/, "", $1);
+  print $0;
+}'
+} # 2}}}
+
+pid () { #{{{2
+  s=0
+  for i in $@; do
+  echo -n "$i: "
+  r=`cat /proc/$i/cmdline|tr '\0' ' ' 2>/dev/null`
+  if [[ $? -ne 0 ]]; then
+    echo not found
+    s=1
+  else
+    echo $r
+  fi
+  done
+  return $s
+} # 2}}}
+
+s () { # 快速查找当前目录下的文件 {{{2
+  name=$1
+  shift
+  find . -name "*$name*" $@
+} # 2}}}
+
+color-blocks () { #Color blocks {{{2
+  echo
+  local width=$(( ($COLUMNS / 16) -1 ))
+  local chars
+  local pre=$(( ( $COLUMNS - ($width+1)*16)/2 ))
+  for ((i=0; i<$width; i++)); chars+="░"
+  for ((i=0; i<$pre; i++)); echo -n " "
+  for ((i=0; i<=7; i++)); echo -en "\e[3${i}m${chars} \e[1;3${i}m${chars}\e[m "; echo; echo
+  unset i
+} # 2}}}
+
+code () { #VSCode {{{2
+  VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
+} # 2}}}
+
+# End: Functions 1}}}
 
 # 插件 My Plugins {{{1
 

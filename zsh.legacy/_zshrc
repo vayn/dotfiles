@@ -38,6 +38,24 @@ fi
   return -1
 }
 # 2}}}
+
+if [[ $TERM == screen* ]]; then # {{{2 设置标题
+  # 注：不支持中文
+  title () { echo -ne "\ek$*\e\\" }
+else
+  title () { echo -ne "\e]0;$*\a" }
+fi
+# 2}}}
+
+if [[ $(uname -a) == *Ubuntu* ]]; then # {{{2 tree
+  tree () {
+  command tree -C $@|ascii2uni -a K 2>/dev/null
+  }
+else
+  alias tree="tree -C"
+fi
+# 2}}}
+
 # 1}}}
 
 
@@ -293,6 +311,7 @@ alias -g LS="|less"
 alias -g NN="*(oc[1])"
 alias -g NUL="/dev/null"
 # 2}}}
+
 # 1}}}
 
 
@@ -305,20 +324,6 @@ song () { find ~/Music -iname "$1*" }
 mvpc () { mv $1 "`echo $1|ascii2uni -a J`" } # 将以 %HH 表示的文件名改正常
 nocolor () { sed -r "s:\x1b\[[0-9;]*[mK]::g" }
 expandurl() { curl -sIL $1 | sed -n 's/Location:.* //p' }
-if [[ $TERM == screen* ]]; then # {{{2 设置标题
-  # 注：不支持中文
-  title () { echo -ne "\ek$*\e\\" }
-else
-  title () { echo -ne "\e]0;$*\a" }
-fi
-if [[ $(uname -a) == *Ubuntu* ]]; then # {{{2 tree
-  tree () {
-  command tree -C $@|ascii2uni -a K 2>/dev/null
-  }
-else
-  alias tree="tree -C"
-fi
-
 gcc () { # {{{2
   errfile=$HOME/tmpfs/error
   command gcc -g -Wall $@ >$errfile 2>&1
@@ -420,7 +425,7 @@ s () { # 快速查找当前目录下的文件 {{{2
   find . -name "*$name*" $@
 } # 2}}}
 
-tianqi () { #天气预报 {{{2
+weather () { #天气预报 {{{2
   if [[ $# -eq 1 ]]; then
   city=$1
   elif [[ $# -eq 0 ]]; then
