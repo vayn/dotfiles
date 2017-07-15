@@ -22,6 +22,22 @@ OS=${$(uname)%_*}
 unsetopt nomatch
 # 2}}}
 
+# {{{2 设置光标颜色
+if [[ $TERM == xterm* ]] || [[ $TERM == *rxvt* ]]; then
+  cursorcolor () { echo -ne "\e]12;$*\007" }
+elif [[ $TERM == screen* ]]; then
+  if [[ -n "$TMUX" ]]; then
+  cursorcolor () { echo -ne "\ePtmux;\e\e]12;$*\007\e\\" }
+  else
+  cursorcolor () { echo -ne "\eP\e]12;$*\007\e\\" }
+  fi
+fi
+
+[[ -x /usr/lib/command-not-found ]] && command_not_found_handler () { # {{{2
+  /usr/lib/command-not-found -- $@ |& sed 's/apt-get/aptitude/g' >&2
+  return -1
+}
+# 2}}}
 # 1}}}
 
 
@@ -416,7 +432,7 @@ tianqi () { #天气预报 {{{2
   w3m -dump "http://3g.sina.com.cn/prog/wapsite/weather_new/forecast_new.php?city=$city&vt=4" 2>/dev/null | sed '1,/转发至微博/d;/生活指数/,$d;s/\[[^]]\+\]//g'
 } # 2}}}
 
-color-blocks () {
+color-blocks () { #Color blocks {{{2
   echo
   local width=$(( ($COLUMNS / 16) -1 ))
   local chars
@@ -427,23 +443,10 @@ color-blocks () {
   unset i
 } # 2}}}
 
+code () { #VSCode {{{2
+  VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
+} # 2}}}
 
-# {{{2 设置光标颜色
-if [[ $TERM == xterm* ]] || [[ $TERM == *rxvt* ]]; then
-  cursorcolor () { echo -ne "\e]12;$*\007" }
-elif [[ $TERM == screen* ]]; then
-  if [[ -n "$TMUX" ]]; then
-  cursorcolor () { echo -ne "\ePtmux;\e\e]12;$*\007\e\\" }
-  else
-  cursorcolor () { echo -ne "\eP\e]12;$*\007\e\\" }
-  fi
-fi
-
-[[ -x /usr/lib/command-not-found ]] && command_not_found_handler () { # {{{2
-  /usr/lib/command-not-found -- $@ |& sed 's/apt-get/aptitude/g' >&2
-  return -1
-}
-# 2}}}
 # 1}}}
 
 
