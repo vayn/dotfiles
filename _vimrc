@@ -35,7 +35,6 @@ NeoBundle 'powerman/vim-plugin-viewdoc'
 " Utility {{{4
 NeoBundle 'CodeFalling/fcitx-vim-osx'
 NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'junegunn/goyo.vim'
 NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -44,6 +43,13 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'tpope/vim-surround'
+
+" Easy motion {{{5
+NeoBundle 'easymotion/vim-easymotion'
+NeoBundle 'haya14busa/incsearch.vim'
+NeoBundle 'haya14busa/incsearch-easymotion.vim'
+" 5}}}
+
 " 4}}}
 
 " Generic Programming Support {{{4
@@ -59,10 +65,12 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
 " 4}}}
 
+" Aspect Programming Support {{{4
+
 " Git Support
 NeoBundle 'tpope/vim-fugitive'
 
-" Web Development Support {{{4
+" Web Development Support {{{5
 NeoBundle 'ap/vim-css-color'
 " WeChat
 NeoBundle 'chemzqm/wxapp.vim'
@@ -76,12 +84,14 @@ NeoBundle 'Quramy/tsuquyomi', {
             \    'autoload': { 'filetypes': ['typescript'] }
             \ }
 " JSX Support
-NeoBundle 'mxw/vim-jsx'
+NeoBundle 'mxw/vim-jsx', {
+            \   'lazy': 1,
+            \   'autoload': { 'filetypes': ['html', 'javascript'] }
+            \ }
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/jspc.vim'
 NeoBundle 'othree/yajs.vim'
-" 4}}}
-
+" 5}}}
 
 " Rust Support
 NeoBundle 'wting/rust.vim', {
@@ -89,11 +99,13 @@ NeoBundle 'wting/rust.vim', {
             \    'autoload': { 'filetypes': ['rust'] }
             \ }
 
-" Elixir Support {{{4
+" Elixir Support {{{5
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'avdgaag/vim-phoenix'
 NeoBundle 'mmorearty/elixir-ctags'
 NeoBundle 'slashmili/alchemist.vim'
+" 5}}}
+
 " 4}}}
 
 " Theme / Interface {{{4
