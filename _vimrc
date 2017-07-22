@@ -803,6 +803,21 @@ autocmd FileType elixir nnoremap <buffer> <leader>h :call alchemist#exdoc()<CR>
 autocmd FileType elixir nnoremap <buffer> <leader>d :call alchemist#exdef()<CR>
 " 2}}}
 
+" Easy motion {{{2
+" incsearch {{{3
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" 3}}}
+
+" incsearch-easymotion {{{3
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
+" 3}}}
+
+" 2}}}
+
 " End: Plugins 1}}}
 
 " vim:fdm=marker
